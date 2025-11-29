@@ -1,6 +1,49 @@
 # App Busca CEP - Clean Architecture
 
-Aplicativo Flutter para busca de endereços por CEP utilizando a API ViaCEP, desenvolvido seguindo os princípios de Clean Architecture.
+> Projeto desenvolvido para o MBA em Cloud Architecture - FIAP
+
+Aplicativo Flutter para busca de endereços por CEP utilizando a API ViaCEP, desenvolvido seguindo os princípios de Clean Architecture com pipeline completo de CI/CD.
+
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido como parte do trabalho de conclusão do MBA em Cloud Architecture, com o objetivo de demonstrar a implementação de uma **esteira de CI/CD completa** utilizando GitHub Actions, aplicando conceitos de DevOps, automação e boas práticas de desenvolvimento.
+
+## 🚀 Demo ao Vivo
+
+**Acesse a aplicação:** [https://sandrovisky.github.io/fiap-devops/](https://sandrovisky.github.io/fiap-devops/)
+
+## 🔄 Pipeline CI/CD (GitHub Actions)
+
+A esteira automatizada implementada cobre os seguintes processos:
+
+### ✅ Testes e Qualidade de Código
+- **Análise Estática**: Verificação automática de código com `flutter analyze`
+- **Formatação**: Padronização de código com `dart format`
+- **Testes Unitários**: Execução de 23 testes cobrindo todas as camadas
+- **Cobertura de Código**: Geração e upload para Codecov
+
+### 🏗️ Build
+- **Build Web**: Compilação otimizada para produção
+- **Geração de Artefatos**: Build disponibilizado para download por 7 dias
+
+### 🌐 Deploy Automático
+- **GitHub Pages**: Deploy automático na branch `main`
+- **URL Base Configurada**: Aplicação acessível publicamente
+- **Deploy Condicional**: Apenas em push para `main`
+
+### 📋 Gatilhos da Pipeline
+```yaml
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+```
+
+### 🔐 Segurança e Permissões
+- Utilização de `GITHUB_TOKEN` com permissões controladas
+- Isolamento de ambientes de build
+- Cache de dependências para otimização
 
 ## 📐 Arquitetura
 
@@ -185,42 +228,92 @@ AddressRepositoryImpl
 AddressRemoteDataSource (Interface)
     ↓
 AddressRemoteDataSourceImpl
-    ↓
-ViaCEP API
-    ↓
-AddressModel → Address (Entity)
-    ↓
-AddressBloc (AddressState)
-    ↓
-UI Update
+## 🏗️ Estrutura de Pastas Completa
+
+```
+app/
+├── lib/
+│   ├── core/
+│   │   ├── error/
+│   │   └── usecases/
+│   ├── features/
+│   │   └── address/
+│   │       ├── data/
+│   │       ├── domain/
+│   │       └── presentation/
+│   ├── injection_container.dart
+│   └── main.dart
+├── test/
+│   └── features/
+│       └── address/
+│           ├── data/
+│           ├── domain/
+│           └── presentation/
+├── integration_test/
+│   └── app_test.dart
+└── pubspec.yaml
 ```
 
-## 🎨 Screenshots
+## 🔧 Tecnologias e Ferramentas
 
-O aplicativo possui:
-- Campo de entrada para CEP com formatação automática
-- Botão de busca
-- Exibição dos dados do endereço em cards
-- Indicador de loading
-- Mensagens de erro contextuais
+### Framework e Linguagem
+- **Flutter 3.27.1**: Framework multiplataforma
+- **Dart 3.x**: Linguagem de programação
 
-## 📝 Exemplo de Uso
+### Arquitetura e Padrões
+- **Clean Architecture**: Separação em camadas (Domain, Data, Presentation)
+- **BLoC Pattern**: Gerenciamento de estado reativo
+- **Dependency Injection**: GetIt para inversão de dependências
+- **Repository Pattern**: Abstração de fontes de dados
 
-```dart
-// 1. Digite um CEP válido (ex: 01310-100)
-// 2. Clique em "Buscar"
-// 3. Visualize o endereço encontrado
+### CI/CD e DevOps
+- **GitHub Actions**: Automação da pipeline
+- **GitHub Pages**: Hospedagem estática
+- **Codecov**: Análise de cobertura de código
 
-// Exemplo de resultado:
-// CEP: 01310-100
-// Logradouro: Avenida Paulista
-// Bairro: Bela Vista
-// Cidade: São Paulo
-// Estado: SP
+### Testes
+- **23 Testes Unitários**: Cobertura completa das camadas
+- **Mockito**: Framework de mocking
+- **BLoC Test**: Testes específicos para BLoC
+- **Integration Test**: Testes E2E
+
+## 📊 Fluxo da Esteira CI/CD
+
+```
+Push/PR → GitHub Actions
+    ↓
+[Job: Test]
+    ├─ Checkout código
+    ├─ Setup Flutter 3.27.1
+    ├─ Instalar dependências
+    ├─ Formatar código
+    ├─ Análise estática
+    ├─ Executar 23 testes
+    └─ Upload cobertura
+    ↓
+[Job: Build Web] (se testes passarem)
+    ├─ Checkout código
+    ├─ Setup Flutter
+    ├─ Build Web Release
+    ├─ Salvar artefato (7 dias)
+    └─ Deploy GitHub Pages (só main)
+    ↓
+✅ App disponível em:
+https://sandrovisky.github.io/fiap-devops/
 ```
 
-## 🔐 Tratamento de Erros
+## 🤝 Sobre o Projeto Acadêmico
 
+Este projeto foi desenvolvido como exemplo prático de:
+- Implementação de pipeline CI/CD completa
+- Aplicação de princípios de Clean Architecture
+- Automação de testes e deploy
+- Boas práticas de DevOps e Cloud Computing
+- Integração contínua e entrega contínua
+
+**Instituição**: FIAP  
+**Curso**: MBA em Cloud Architecture  
+**Foco**: DevOps, CI/CD e Arquitetura de Software
 O aplicativo trata diversos cenários de erro:
 
 - **CEP Inválido**: Validação de formato (8 dígitos)
