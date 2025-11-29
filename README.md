@@ -228,28 +228,26 @@ AddressRepositoryImpl
 AddressRemoteDataSource (Interface)
     ↓
 AddressRemoteDataSourceImpl
+```
 
-## 🏗️ Estrutura do Projeto
+## 🏗️ Estrutura do Repositório
 
-O projeto segue Clean Architecture com separação clara de responsabilidades:
-
-### 📁 Organização Principal
-- **`.github/workflows/`**: Pipeline CI/CD com GitHub Actions
-- **`lib/core/`**: Funcionalidades compartilhadas (errors, usecases base)
-- **`lib/features/address/`**: Feature de busca de CEP
-  - **`domain/`**: Entities, repositories (interfaces), use cases
-  - **`data/`**: Models, data sources, repository implementations
-  - **`presentation/`**: BLoC, pages, widgets
-- **`lib/injection_container.dart`**: Configuração de Dependency Injection
-- **`test/`**: Testes unitários espelhando a estrutura de `lib/`
-- **`integration_test/`**: Testes de integração E2E
-
-### 📄 Arquivos Principais
-- `lib/main.dart` - Entry point da aplicação
-- `lib/features/address/domain/entities/address.dart` - Entidade de domínio
-- `lib/features/address/domain/usecases/get_address_by_cep.dart` - Caso de uso
-- `lib/features/address/presentation/bloc/address_bloc.dart` - Gerenciamento de estado
-- `pubspec.yaml` - Dependências e configuração do projeto
+```
+fiap-devops/
+├── .github/
+│   └── workflows/
+│       └── flutter-ci.yml    # Pipeline CI/CD
+│
+└── app/                       # Aplicação Flutter
+    ├── lib/
+    │   ├── core/
+    │   ├── features/
+    │   ├── injection_container.dart
+    │   └── main.dart
+    ├── test/
+    ├── integration_test/
+    └── pubspec.yaml
+```
 
 ## 🔧 Tecnologias e Ferramentas
 
