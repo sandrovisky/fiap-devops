@@ -1,0 +1,87 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Testes Unitários e Análise
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.5'
+          channel: 'stable'
+          cache: true
+
+      - name: Verificar versão do Flutter
+        run: flutter --version
+
+      - name: Instalar dependências
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Verificar formatação
+        working-directory: ./app
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Análise estática do código
+        working-directory: ./app
+        run: flutter analyze
+
+      - name: Executar testes unitários
+        working-directory: ./app
+        run: flutter test --coverage
+
+      - name: Upload de cobertura para Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./app/coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.5'
+          channel: 'stable'
+          cache: true
+
+      - name: Instalar dependências
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Build Web
+        working-directory: ./app
+        run: flutter build web --release
+
+      - name: Upload build Web como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: app/build/web/
+          retention-days: 7
