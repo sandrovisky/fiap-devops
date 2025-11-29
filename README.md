@@ -228,30 +228,78 @@ AddressRepositoryImpl
 AddressRemoteDataSource (Interface)
     ↓
 AddressRemoteDataSourceImpl
+
 ## 🏗️ Estrutura de Pastas Completa
 
 ```
-app/
-├── lib/
-│   ├── core/
-│   │   ├── error/
-│   │   └── usecases/
-│   ├── features/
-│   │   └── address/
-│   │       ├── data/
-│   │       ├── domain/
-│   │       └── presentation/
-│   ├── injection_container.dart
-│   └── main.dart
-├── test/
-│   └── features/
-│       └── address/
-│           ├── data/
-│           ├── domain/
-│           └── presentation/
-├── integration_test/
-│   └── app_test.dart
-└── pubspec.yaml
+fiap-devops/
+├── .github/
+│   └── workflows/
+│       └── flutter-ci.yml          # Pipeline CI/CD
+│
+└── app/
+    ├── lib/
+    │   ├── core/
+    │   │   ├── error/
+    │   │   │   └── failures.dart
+    │   │   └── usecases/
+    │   │       └── usecase.dart
+    │   │
+    │   ├── features/
+    │   │   └── address/
+    │   │       ├── data/
+    │   │       │   ├── datasources/
+    │   │       │   │   └── address_remote_data_source.dart
+    │   │       │   ├── models/
+    │   │       │   │   └── address_model.dart
+    │   │       │   └── repositories/
+    │   │       │       └── address_repository_impl.dart
+    │   │       │
+    │   │       ├── domain/
+    │   │       │   ├── entities/
+    │   │       │   │   └── address.dart
+    │   │       │   ├── repositories/
+    │   │       │   │   └── address_repository.dart
+    │   │       │   └── usecases/
+    │   │       │       └── get_address_by_cep.dart
+    │   │       │
+    │   │       └── presentation/
+    │   │           ├── bloc/
+    │   │           │   ├── address_bloc.dart
+    │   │           │   ├── address_event.dart
+    │   │           │   └── address_state.dart
+    │   │           ├── pages/
+    │   │           │   └── address_page.dart
+    │   │           └── widgets/
+    │   │               ├── address_display.dart
+    │   │               └── address_form.dart
+    │   │
+    │   ├── injection_container.dart
+    │   └── main.dart
+    │
+    ├── test/
+    │   └── features/
+    │       └── address/
+    │           ├── data/
+    │           │   ├── datasources/
+    │           │   │   └── address_remote_data_source_test.dart
+    │           │   ├── models/
+    │           │   │   └── address_model_test.dart
+    │           │   └── repositories/
+    │           │       └── address_repository_impl_test.dart
+    │           ├── domain/
+    │           │   └── usecases/
+    │           │       └── get_address_by_cep_test.dart
+    │           └── presentation/
+    │               └── bloc/
+    │                   └── address_bloc_test.dart
+    │
+    ├── integration_test/
+    │   └── app_test.dart
+    │
+    ├── pubspec.yaml
+    ├── README.md
+    └── COMO_EXECUTAR.md
 ```
 
 ## 🔧 Tecnologias e Ferramentas
