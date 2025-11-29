@@ -26,7 +26,7 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeAddressModel_0 extends _i1.SmartFake implements _i2.AddressModel {
   _FakeAddressModel_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AddressRemoteDataSource].
@@ -41,13 +41,12 @@ class MockAddressRemoteDataSource extends _i1.Mock
   @override
   _i4.Future<_i2.AddressModel> getAddressByCep(String? cep) =>
       (super.noSuchMethod(
+        Invocation.method(#getAddressByCep, [cep]),
+        returnValue: _i4.Future<_i2.AddressModel>.value(
+          _FakeAddressModel_0(
+            this,
             Invocation.method(#getAddressByCep, [cep]),
-            returnValue: _i4.Future<_i2.AddressModel>.value(
-              _FakeAddressModel_0(
-                this,
-                Invocation.method(#getAddressByCep, [cep]),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.AddressModel>);
+          ),
+        ),
+      ) as _i4.Future<_i2.AddressModel>);
 }

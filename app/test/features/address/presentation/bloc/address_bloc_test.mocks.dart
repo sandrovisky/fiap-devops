@@ -31,12 +31,12 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeAddressRepository_0 extends _i1.SmartFake
     implements _i2.AddressRepository {
   _FakeAddressRepository_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
   _FakeEither_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 /// A class which mocks [GetAddressByCep].
@@ -48,26 +48,23 @@ class MockGetAddressByCep extends _i1.Mock implements _i4.GetAddressByCep {
   }
 
   @override
-  _i2.AddressRepository get repository =>
-      (super.noSuchMethod(
-            Invocation.getter(#repository),
-            returnValue: _FakeAddressRepository_0(
-              this,
-              Invocation.getter(#repository),
-            ),
-          )
-          as _i2.AddressRepository);
+  _i2.AddressRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeAddressRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.AddressRepository);
 
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.Address>> call(String? cep) =>
       (super.noSuchMethod(
+        Invocation.method(#call, [cep]),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Address>>.value(
+          _FakeEither_1<_i6.Failure, _i7.Address>(
+            this,
             Invocation.method(#call, [cep]),
-            returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Address>>.value(
-              _FakeEither_1<_i6.Failure, _i7.Address>(
-                this,
-                Invocation.method(#call, [cep]),
-              ),
-            ),
-          )
-          as _i5.Future<_i3.Either<_i6.Failure, _i7.Address>>);
+          ),
+        ),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.Address>>);
 }

@@ -28,7 +28,7 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
   _FakeEither_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AddressRepository].
@@ -44,13 +44,12 @@ class MockAddressRepository extends _i1.Mock implements _i3.AddressRepository {
     String? cep,
   ) =>
       (super.noSuchMethod(
+        Invocation.method(#getAddressByCep, [cep]),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Address>>.value(
+          _FakeEither_0<_i5.Failure, _i6.Address>(
+            this,
             Invocation.method(#getAddressByCep, [cep]),
-            returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Address>>.value(
-              _FakeEither_0<_i5.Failure, _i6.Address>(
-                this,
-                Invocation.method(#getAddressByCep, [cep]),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.Address>>);
+          ),
+        ),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Address>>);
 }

@@ -19,11 +19,11 @@ class Address extends Equatable {
 
   @override
   List<Object?> get props => [
-    cep,
-    logradouro,
-    complemento,
-    bairro,
-    localidade,
-    uf,
-  ];
+        cep,
+        logradouro,
+        complemento,
+        bairro,
+        localidade,
+        uf,
+      ];
 }
