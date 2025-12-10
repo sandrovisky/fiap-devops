@@ -58,10 +58,34 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false
 
+  integration:
+    name: Testes de Integração
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.1'
+          channel: 'stable'
+          cache: true
+
+      - name: Instalar dependências
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Executar testes de integração
+        working-directory: ./app
+        run: flutter test integration_test/
+
   build-web:
     name: Build Web
     runs-on: ubuntu-latest
-    needs: test
+    needs: integration
 
     steps:
       - name: Checkout do código
